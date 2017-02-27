@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>lalala</title>
+  </head>
+  <body>
+    <img src="./zbz.jpg" id="y" originClean/>
+    <script>
+
+      var img = document.getElementById('y');
+      img.crossOrigin = '';
+      let faceDetector = new FaceDetector({fastMode: true, maxDetectedFaces: 1});
+
+      faceDetector.detect(img).then(detectedFaces => {
+        console.log('detectedFaces:',detectedFaces);
+        for (const face of detectedFaces) {
+          console.log(' Face @ (${face.boundingBox.x}, ${face.boundingBox.y}),' +
+              ' size ${face.boundingBox.width}x${face.boundingBox.height}');
+        }
+      }).catch((e) => {
+          console.error("Face Detection failed, boo.", e);
+        });
+    </script>
+  </body>
+</html>
